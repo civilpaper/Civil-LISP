@@ -1,0 +1,10 @@
+(defun C:adds() (command "-vbarun" "addsub"))
+(defun C:bv() (command "-vbarun" "bovia"))
+(defun C:TG() (command "-vbarun" "TG")) ;;;
+(defun C:DVI() (command "-vbarun" "DIEMDINHVI"))
+(defun C:BU() (command "-vbarun" "B_UP"))
+(defun C:tbv() (command "-vbarun" "tenbv"))
+(defun C:bnv() (command "-vbarun" "bangnova"))
+(defun C:xkl() (command "-vbarun" "xuatkl"))
+(defun C:531() (command "-vbarun" "QL53_1"))
+(defun C:sltn() (command "-vbarun" "SL_TN"))

@@ -1,0 +1,95 @@
+;# VLIDE desktop file [v.3]. DO NOT EDIT!!!
+(:AL
+	(_%PROJECT-LIST%)
+	(*UserBPTCollection*)
+	(*apropos-downcase*)
+	(*sdb-watcher-setting*)
+	(*kbd-enter-auto-indent* . T)
+	(*ppf-snap-options-to-buffer*)
+	(*ppf-longlist-style* . 0)
+	(*ppf-close-comment-prefix* . "end of ")
+	(*ppf-close-comment*)
+	(*ppf-width* . 72)
+	(*ppf-rpar-style* . 2)
+	(*ppf-unprotected-case* . 0)
+	(*ppf-protected-case* . 0)
+	(*ppf-split-comments*)
+	(*ppf-preserve-newlines* . T)
+	(*ppf-tabs* . T)
+	(*pp-comment-indent* . 40)
+	(*pp-max-size* . 60)
+	(*pp-max-miser-car* . 9)
+	(*pp-tiny-indent* . 1)
+	(*toolbar-cfg* :TOOLBAR ((:HT (4 . *edt-toolbar-dlg*) (4 . *find-toolbar-dlg*)) (:HT (4 . *sdb-toolbar-dlg*) (4 . *inspect-toolbar-dlg*) (4 . *console-toolbar-dlg*))) :FL nil)
+	(*printer-font* . #14(0 0 0 0 0 0 0 0 0 0 0 0 0 ""))
+	(*print-inch-or-mm* . :INCH)
+	(*printer-footer* "&r&p" nil nil "&p")
+	(*printer-header* "&cFile: &f &r&d" nil "File: &f" "&d")
+	(*print-bottom-margin* . 15.0)
+	(*print-top-margin* . 15.0)
+	(*print-right-margin* . 15.0)
+	(*print-left-margin* . 25.0)
+	(*vlisp-time-format* . "~vh:~@@i ~:h")
+	(*vlisp-date-format* . "~V@m/~V@d/~@@y")
+	(*editor-mark-found*)
+	(*editor-sample-window* (:AUTOLISP :RO nil))
+	(win-frame . :MINIMIZED)
+	(logfont . #14(15 8 0 0 400 0 0 0 0 1 2 2 49 "Fixedsys"))
+	(*twin-tab-width*)
+	(*twin-left-margin*)
+	(*ACAD-INSPECT-VERBOSE* . T)
+	(*inspect-xdata-Default*)
+	(*SDB-SKIP-TOP-LEVEL* . T)
+	(*SDB-ANIMATE-DELAY* . 500)
+	(*prin-echo-ACAD* . T)
+	(*load-verbose*)
+	(*load-print*)
+	(*al-check-warning*)
+	(*break*)
+	(*protect-assign* . 2)
+	(*source-file-added-filters*)
+	(*edit-file-history*)
+	(*desktop-autosave* . T)
+	(*desktop-save-windows* . T)
+	(*auto-switch-to-ACAD* . T)
+	(*organize-zoom*)
+	(*organize-windows* . T)
+	(*ext-lex-scanner* (".LSP" . T) ("" . T) (".L" . T) (".MNL" . :AL) (".MKP" . :AL) (".GLD" . :AL) (".LPP" . :LPP) (".CPP" . :CPP) (".CC" . :CPP) (".C" . :CPP) (".HPP" . :CPP) (".HH" . :CPP) (".H" . :CPP) (".DCL" . :DCL) (".SQL" . :SQL) (".TXT"))
+	(editor-undo-join . T)
+	(*editor-backup-by-copy*)
+	(*editor-make-backup* . T)
+	)
+(terminal
+	:CAPTION "Trace"
+	:known-type :trace-terminal
+	:PRIMARY nil
+	:APEX 1966088
+	:SIZE 12190840
+	:STATE :MINIMIZED
+	:RO T
+	:FGC nil
+	:BGC nil
+	:LXC nil
+	:LEX-ID nil
+	:CLV nil
+	:TW 8
+	:LM 10
+	:CONTEXT :AUTOLISP
+	)
+(console
+	:CAPTION "Visual LISP Console"
+	:known-type :al-console
+	:PRIMARY T
+	:APEX 22347784
+	:SIZE 7406736
+	:STATE :NORMAL
+	:RO nil
+	:FGC nil
+	:BGC nil
+	:LXC T
+	:LEX-ID :AL
+	:CLV nil
+	:TW 8
+	:LM 10
+	:CONTEXT :AUTOLISP
+	)

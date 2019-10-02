@@ -1,0 +1,11 @@
+(defun c:gl(/ p1)
+  (setq p1 (getpoint "\nPoint put timer: "))
+
+  (command ".insert" "timer" p1 1 1 0)
+  (command ".zoom" "w" (list (+ (car p1) 0.0926) (+ (cadr p1) 0.0910)) (list (+ (car p1) 1.7603) (+ (cadr p1) -0.3422)))
+  (setvar "FILEDIA" 1)
+  (while (= t T)
+    (command "regen")
+    (command "delay" 100)
+  )
+)

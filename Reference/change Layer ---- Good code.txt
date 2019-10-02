@@ -1,0 +1,148 @@
+;;;*******************************************************************;
+;;; Change Layer                                                      ;
+;;;-------------------------------------------------------------------;
+;;; This is a program ment to allow the wnd user to change an item(s) ;
+;;; to the current layer.                                             ;
+;;;                                                                   ;
+;;; You can either select an item to be changed or have several items ;
+;;; pre-selected before the program is called.                        ;
+;;;                                                                   ;
+;;; Date: 06.05.06                                                    ;
+;;; Author: John (Se7en) K                                            ;
+;;; Version: 1.0                                                      ;
+;;;*******************************************************************;
+(defun ChangeLayer ( / myset x x-obj seled)
+  (vl-load-com)
+
+  (vl-UndoBegin)
+  ; error function
+  (defun *error* (msg) 
+    (if 
+      (not 
+        (member msg '("console break" "Function cancelled" "quit / exit abort")))
+      (progn 
+        ;; cancle everything.
+        (command) (command)
+        (vl-UndoEnd) 
+        (princ (strcat "\nError: " msg)))
+      ); if
+    (princ)
+    );
+  ;end error function
+  
+  (setq seled (Get-Selcted))
+  (cond 
+    ;; test to see if a the user has a bunch of stuff selected...
+    ((eq (type seled) 'LIST)
+  ;; create an empty selection set.
+       (setq myset (ssadd))
+       (setq myset (foreach x seled (ssadd x myset)))
+       (foreach 
+         x-obj 
+          (ssget->vla-list myset) (vlax-put-property x-obj 'LAYER (getvar "clayer"))))
+    ;; if the user wnats to select an entity let them...
+    (T (vlax-put-property (vlax-ename->vla-object seled) 'LAYER (getvar "clayer"))))
+
+  (vl-UndoEnd)
+ (princ)
+)
+
+(defun c:dff () (changelayer))
+(princ "\nChangeLayer program loaded. Type \"dff\" to run.")
+
+;;;===================================================================;
+;;;             S U P P O R T   P R O C E D U R E S                   ;
+;;;===================================================================;
+
+;;;===================================================================;
+;;; SSGET->VLA-LIST                                                   ;
+;;;-------------------------------------------------------------------;
+;;;                                                                   ;
+;;; This function converts a valid ACAD selction                      ;
+;;; set to a list of vla-objects.                                     ;
+;;;                                                                   ;
+;;; Arguments: selection-list = a valid ACAD selection set            ;
+;;;                             returned by ssget.                    ;
+;;;                                                                   ;
+;;; Returned Value:  A list of all circles as vla-objects             ;
+;;;        such as:  (#<VLA-OBJECT IAcadCircle 01b4211c>              ;
+;;;                   #<VLA-OBJECT IAcadCircle 01b42790>              ;
+;;;                   #<VLA-OBJECT IAcadCircle 01b429a0>)             ;
+;;;                                                                   ;
+;;;Usage: (ssget->vla-list (ssget))                                   ;
+;;;===================================================================;
+(defun ssget->vla-list (selection-set / index vla-list)
+  (setq index 
+        (if selection-set (1- (sslength selection-set)) -1))
+  (while (>= index 0)
+    (setq vla-list
+	    (cons
+	      (vlax-ename->vla-object
+		 (ssname selection-set index)) vla-list)
+	   index (1- index)))
+  vla-list )
+
+;;;===================================================================;
+;;; UNDO GORUPING FUNCTIONS                                           ;
+;;;===================================================================;
+(defun vl-UndoBegin ()
+  (vla-StartUndoMark
+    (vla-Get-ActiveDocument (vlax-Get-Acad-Object))))
+
+(defun vl-UndoEnd ()
+  (vla-EndUndoMark
+    (vla-Get-ActiveDocument (vlax-Get-Acad-Object))))
+
+;;;===================================================================;
+;;; Get-Selcted                                                       ;
+;;;-------------------------------------------------------------------;
+;;; This function will offer a way for the programer to get an        ;
+;;; entity or entities already slected on the screen before the       ;
+;;; program took control. This program was intended for use in an     ;
+;;; ActiveX program. I have chosen not to use the "Pickfirst" method  ;
+;;; in accomplishing this task because I wanted a way to do this even ;
+;;; if the "pickfirst" variable was toggled to zero. If no entity is  ;
+;;; currently selected on the screen, this function will prompt the   ;
+;;; end user to select an entity.                                     ;
+;;;                                                                   ;
+;;; Author: John Kaul                                                 ;
+;;;                                                                   ;
+;;; Returns: Either previously selected entity, a selected entity, or ;
+;;;          a list of selected entities.                             ;
+;;;                                                                   ;
+;;; Usage: (vlax-ename->vla-object (Get-Selcted))                     ;
+;;;                                                                   ;
+;;;-------------------------------------------------------------------;
+;;; Version: 1.1 Added the ability to have more then one selected     ;
+;;;              objects on the screen.                               ;
+;;;===================================================================;
+(defun get-selcted (/ x cntr xlength xlist)
+  (setq x (cadr (ssgetfirst)))
+  (if x (setq xlength (sslength x)))
+  (cond
+    ((= xlength 1)
+     (setq x (ssname x 0))
+     (sssetfirst nil)
+     (redraw x 3))
+    ((> xlength 1)
+     (setq cntr xlength)
+     (cond
+       ((>= cntr 2)
+        (setq cntr (1- xlength))
+        (while (>= cntr 0)
+               (setq xlist (cons (ssname x cntr) xlist)
+                     cntr  (1- cntr)))
+        ;; For higlighting entities
+        ;; (foreach a xlist (progn (sssetfirst nil) (redraw a 3)))
+        )))
+    ((= xlength nil)
+     (while (not (setq x (entsel "\nselect object: "))))
+     (setq x (car x))
+     (sssetfirst nil)
+     ;; For higlighting entities
+     ;; (redraw x 3)
+     ))
+  (if (= nil xlist) x xlist)
+)
+
+;;; EOF

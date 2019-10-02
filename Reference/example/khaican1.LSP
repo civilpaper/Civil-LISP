@@ -1,0 +1,22 @@
+(Defun C:ROOT(/ NUM R)
+      (Initget 1)
+      (Setq Num  (Getreal " \n Enter base number:"))
+      (Setq R (Getreal "\n Enter Root level: "))
+      (if (< num 0)
+	(progn
+	  (if (= (rem R 2) 0)
+	  ;  (progn 
+	 ;   (prompt " Because Number is a Negative Number so R must be a old number")
+	 ;   (initget 1 " Yes No ")
+	 ;   (if ( = "Yes" (Getkword " Do you want to enter other Root level? < Y/N >:"))
+	 ;     (Setq R (Getreal "\n Enter Root level: "))
+	      (prompt " I can't canculate for you")
+	   ;)
+	   ; )
+	    (Prompt "\n The specified root is :")(exp (/ (Log NUM) R))
+          )
+        )
+	(Prompt "\n The specified root is :")(exp (/ (Log NUM) R))
+       
+      )
+)

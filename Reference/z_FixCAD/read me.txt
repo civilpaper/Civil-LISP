@@ -1,0 +1,4 @@
+2012 Version
+C:\Users\<<USER_NAME>>\AppData\Roaming\Autodesk\AutoCAD 2012\R18.2\enu\
+2013 Version
+C:\Users\<<USER_NAME>>\AppData\Roaming\Autodesk\AutoCAD 2013\R19\enu\

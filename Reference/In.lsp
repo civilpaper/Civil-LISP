@@ -1,0 +1,80 @@
+(defun c:in4()   
+   (setq pt1 (getpoint "\nDiem goc trai khung in : "))
+   (setq pt2 (getcorner pt1 "\nDiem goc phai khung in : "))
+   (setq D (getdist "\nKhoang cach cac khung in : "))
+   (setq n (getint "\nSo khung in : "))
+   (setq i 0)
+    (while (< i n)   
+      (setq pt3 (polar pt1 0 (* i D)))
+      (setq pt4 (polar pt2 0 (* i D)))
+      ;;(command "plot" "y" "" "A3THANH" "A4 (210 x 297 mm)" "m" "l" "" "w" pt3 pt4 "F" "C" "" "TD_NV.ctb" "" "" "" "" "" "" "")
+      (command "plot" "y" "" "A3-P3.pc3" "ISO A4 (210.00 x 297.00 MM)" "m" "l" "" "w" pt3 pt4 "F" "C" "" "TD_NV.ctb" "" "" "" "" "" "" "")
+      (setq i (+ i 1))
+    );while
+   (princ)
+);defun
+;-----------------------------------
+(defun c:in3()   
+   (setq pt1 (getpoint "\nDiem goc trai khung in : "))
+   (setq pt2 (getcorner pt1 "\nDiem goc phai khung in : "))
+   (setq D (getdist "\nKhoang cach cac khung in : "))
+   (setq n (getint "\nSo khung in : "))
+   (setq i 0)
+    (while (< i n)   
+      (setq pt3 (polar pt1 0 (* i D)))
+      (setq pt4 (polar pt2 0 (* i D)))
+      (command "plot" "y" "" "A3-P3" "A3" "m" "l" "" "w" pt3 pt4 "5:1" "22,2" "" "TD_NV.ctb" "" "" "" "" "" "" "")
+      ;;(command "plot" "y" "" "mayinphong2" "ISO A3 (297.00 x 420.00 MM)" "m" "l" "" "w" pt3 pt4 "5:1" "22,2" "" "TD_NV.ctb" "" "" "" "" "" "" "")
+      (setq i (+ i 1))
+    );while
+   (princ)
+);defun
+;-----------------------------------
+(defun c:in31()   
+   (setq pt1 (getpoint "\nDiem goc trai khung in : "))
+   (setq pt2 (getcorner pt1 "\nDiem goc phai khung in : "))
+   (setq D (getdist "\nKhoang cach cac khung in : "))
+   (setq n (getint "\nSo khung in : "))
+   (setq i 0)
+    (while (< i n)   
+      (setq pt3 (polar pt1 0 (* i D)))
+      (setq pt4 (polar pt2 0 (* i D)))
+      (command "plot" "y" "" "HP LaserJet 5100 PCL 6" "A3" "m" "l" "" "w" pt3 pt4 "1:1" "18" "" "TD_NV.ctb" "" "" "" "" "" "" "")
+      ;;(command "plot" "y" "" "A3THANH.pc3" "ISO A3 (297.00 x 420.00 MM)" "m" "l" "" "w" pt3 pt4 "1:1" "22,2" "" "TD_NV.ctb" "" "" "" "" "" "" "")
+      (setq i (+ i 1))
+    );while
+   (princ)
+);defun
+;-----------------------------------
+(defun c:in32()   
+   (setq pt1 (getpoint "\nDiem goc trai khung in : "))
+   (setq pt2 (getcorner pt1 "\nDiem goc phai khung in : "))
+   (setq D (getdist "\nKhoang cach cac khung in : "))
+   (setq n (getint "\nSo khung in : "))
+   (setq i 0)
+    (while (< i n)   
+      (setq pt3 (polar pt1 0 (* i D)))
+      (setq pt4 (polar pt2 0 (* i D)))
+      (command "plot" "y" "" "HP LaserJet 5100 PCL 6" "A3" "m" "l" "" "w" pt3 pt4 "1:1" "18" "" "in tracngang-A3.ctb" "" "" "" "" "" "" "")
+      ;;(command "plot" "y" "" "A3THANH.pc3" "ISO A3 (297.00 x 420.00 MM)" "m" "l" "" "w" pt3 pt4 "1:1" "22,2" "" "TD_NV.ctb" "" "" "" "" "" "" "")
+      (setq i (+ i 1))
+    );while
+   (princ)
+);defun
+;-----------------------------------
+(defun c:in33()   
+   (setq pt1 (getpoint "\nDiem goc trai khung in : "))
+   (setq pt2 (getcorner pt1 "\nDiem goc phai khung in : "))
+   (setq D (getdist "\nKhoang cach cac khung in : "))
+   (setq n (getint "\nSo khung in : "))
+   (setq i 0)
+    (while (< i n)   
+      (setq pt3 (polar pt1 0 (* i D)))
+      (setq pt4 (polar pt2 0 (* i D)))
+      (command "plot" "y" "" "HP LaserJet 5100 PCL 6" "A3" "m" "l" "" "w" pt3 pt4 "5:1" "23,6" "" "TD_NV.ctb" "" "" "" "" "" "" "")
+      ;;(command "plot" "y" "" "A3THANH.pc3" "ISO A3 (297.00 x 420.00 MM)" "m" "l" "" "w" pt3 pt4 "5:1" "22,2" "" "TD_NV.ctb" "" "" "" "" "" "" "")
+      (setq i (+ i 1))
+    );while
+   (princ)
+);defun
+;-----------------------------------

@@ -1,0 +1,78 @@
+;; free lisp from cadviet.com
+;;; this lisp was downloaded from http://www.cadviet.com/forum/index.php?showtopic=64082
+ 
+(defun c:gdd (/ oldos )
+(vl-load-com)
+(setq oldos (getvar "osmode"))
+(setvar "osmode" 0)
+(command "undo" "be")
+(makeattbl "GHIDODOC1" nil)
+(makeattbl "GHIDODOC2" T)
+(alert "\n Hay chon cac pline, line, arc can ghi do doc ")
+(setq ssl (acet-ss-to-list (ssget (list (cons 0 "*line,arc")))))
+(foreach ent ssl      
+      (ghidodoc ent)      
+)
+(command "undo" "e")
+(setvar "osmode" oldos)
+(princ)
+)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;; Tao block thuoc tinh 
+(defun makeattbl (name Tflag / p e1 e2 e3 )
+(setvar "aflags" 0)
+(if (not (tblsearch "block" name ))
+(progn
+(setq p (list 0.0 0.0 0.0))
+(if Tflag
+(command "pline" (polar p pi 15) "w" 0.0 3 (polar p pi 9) "w" 0.75 0.75 (polar p  0 15) "")
+(command "pline" (polar p 0 15) "w" 0.0 3 (polar p 0 9) "w" 0.75 0.75 (polar p  pi 15) "")
+)
+(setq e1 (entlast))
+(command "attdef" "" "Dodoc" "dodoc" "10%" "j" "mc" (polar p  (/ pi 2) 3) 3 0  )
+(setq e2 (entlast))
+(command "attdef" "" "length" "dodai" "500" "j" "mc" (polar p (- (/ pi 2)) 3) 3 0  )
+(setq e3 (entlast))
+(command "block" name p e1 e2 e3 "")
+) )
+)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun ghidodoc (ent / obj h1 h2 plst p2 p3 len i v ang ans)
+(setq els (entget ent)  )
+(if (or (= (cdr (assoc 0 els)) "LINE") (= (cdr (assoc 0 els)) "ARC"))
+    (progn 
+       (command "pedit" ent "y" "")
+       (setq ent (entlast))
+    )
+)
+(redraw ent 3)
+(setq obj (vlax-ename->vla-object ent)
+          plst (acet-geom-vertex-list ent) 
+          h1 (getreal "\n Nhap cao do diem dau: ") )
+(foreach p plst
+    (setq par (vlax-curve-getparamatpoint obj p)                   
+          ;;;;;;;; h (getreal "\n Nhap chieu cao text: ")
+          ;;;;;;;; p1 (vlax-curve-getstartpoint obj)
+          p2 (vlax-curve-getpointatparam obj (1+ par))  )
+    (if p2 (progn
+              (setq  p3 (vlax-curve-getpointatparam obj (+ par 0.5))
+                        h2 (getreal "\n Nhap cao do diem ke tiep: ")
+                        len (- (vlax-curve-getdistatpoint obj p2) (vlax-curve-getdistatpoint obj p))
+                        v (vlax-curve-getfirstderiv obj (+ par 0.5))
+                        ang (atan (/ (cadr v) (car v)))
+                        i (/ (* (abs (- h1 h2)) 100) len)  )
+              (command "insert" "GHIDODOC1" "R" (* (/ ang pi) 180) p3 "" ""  (strcat "i = " (rtos i 2 4) "%") (strcat "L = " (rtos len 2 1) "(m)") )              
+              (setq ans (getstring "\n Ban co dong y voi chieu do doc nay < y or n> : "))
+              (if (= (strcase ans) "N")
+                  (progn
+                  (command "erase" "last" "")
+                  (command "insert" "GHIDODOC2" "R" (* (/ ang pi) 180) p3 "" ""  (strcat "i = " (rtos i 2 4) "%") (strcat "L = " (rtos len 2 1) "(m)") )
+                  )
+               )
+               )
+     )
+     (setq h1 h2)
+)
+(redraw ent 4)
+)
+

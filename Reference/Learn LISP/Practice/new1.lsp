@@ -1,0 +1,6 @@
+(defun C:myProg()
+	(princ "Nguyen")
+	(princ "Ha")
+	(princ "Huan")
+	(princ)
+	)
